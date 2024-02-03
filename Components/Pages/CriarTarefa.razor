@@ -1,0 +1,59 @@
+﻿@page "/tarefas/criar"
+
+@inject NavigationManager Navigation
+@inject ApplicationDbContext Context
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@rendermode InteractiveServer
+@attribute [Authorize]
+
+
+<h4><b>Cadastrar uma nova tarefa</b></h4>
+
+<EditForm Model="@todo" OnValidSubmit="OnSubmitAsync">
+    <DataAnnotationsValidator />
+    <ValidationSummary /> <!-- Aparece as mensagens de erros-->
+
+    <div class="mb-3">
+        <label for="nomedatarefa" class="form-label">Tarefa </label>
+        <input type="form-control" class="form-control" id="nomedatarefa" placeholder="Nome da Tarefa" @bind="todo.TarefaName">
+    </div>
+
+    <div class="mb-3">
+        <label for="descricaotarefa" class="form-label">Descreva a tarefa </label>
+        <textarea class="form-control" id="descricaotarefa" rows="3" @bind="todo.TarefaDescription"></textarea>
+    </div>
+
+    <label for="dataEscolhida">Escolha uma data:</label>
+    <input type="date" id="dataEscolhida" name="dataEscolhida" @bind="todo.DataTarefa" style="margin-right: 10px;">
+
+    <button type="submit" class="btn btn-outline-success mb-2">
+        Cadastrar tarefa
+    </button>
+
+    <a href="/tarefas" class="btn btn-outline-danger mb-2">Cancelar</a>
+
+</EditForm>
+<hr>
+
+@code {
+
+    public Todo todo { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        todo.DataTarefa = DateTime.Now;
+    }
+
+    public async Task OnSubmitAsync()
+    {
+        var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authenticationState.User;
+
+        // Agora você pode acessar as propriedades do usuário, por exemplo:
+        todo.User = user.Identity.Name;
+        Context.Add(todo);
+        await Context.SaveChangesAsync();
+        Navigation.NavigateTo(uri: "/tarefas");
+    }
+
+}

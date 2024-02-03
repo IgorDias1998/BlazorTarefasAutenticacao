@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\igord\\source\\repos\\BlazorTarefasAutenticacao\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorTarefasAutenticacao.bundle.scp.css",
+      "PackagePath": "staticwebassets\\BlazorTarefasAutenticacao.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\igord\\source\\repos\\BlazorTarefasAutenticacao\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\igord\\source\\repos\\BlazorTarefasAutenticacao\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\igord\\source\\repos\\BlazorTarefasAutenticacao\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\igord\\source\\repos\\BlazorTarefasAutenticacao\\wwwroot\\check_12901779.png",
+      "PackagePath": "staticwebassets\\check_12901779.png"
+    },
+    {
+      "Id": "C:\\Users\\igord\\source\\repos\\BlazorTarefasAutenticacao\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.BlazorTarefasAutenticacao.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.BlazorTarefasAutenticacao.props",
+      "PackagePath": "build\\BlazorTarefasAutenticacao.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.BlazorTarefasAutenticacao.props",
+      "PackagePath": "buildMultiTargeting\\BlazorTarefasAutenticacao.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.BlazorTarefasAutenticacao.props",
+      "PackagePath": "buildTransitive\\BlazorTarefasAutenticacao.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

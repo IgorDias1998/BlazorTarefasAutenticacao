@@ -1,0 +1,64 @@
+﻿@page "/tarefas/editar/{id:int}"
+
+@rendermode InteractiveServer
+@inject ApplicationDbContext Context
+@inject NavigationManager Navigation
+
+
+<h3 style="font-family: 'Courier New', Courier, monospace;"><b>Editar tarefa</b></h3>
+
+@if (Tarefa != null)
+{
+    <EditForm Model="@Tarefa" OnValidSubmit="EditarTarefa" FormName="editarTarefa">
+
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label for="TarefaName">Nome Tarefa:</label>
+            <input type="text" class="form-control" id="TarefaName" @bind="Tarefa.TarefaName" />
+        </div>
+        <div class="form-group">
+            <label for="TarefaDescription">Descrição:</label>
+            <textarea class="form-control" id="TarefaDescription" @bind="Tarefa.TarefaDescription"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="DataTarefa">Data:</label>
+            <input type="date" class="form-control" id="DataTarefa" @bind="Tarefa.DataTarefa" />
+        </div>
+        <div class="form-group">
+            <label for="StatusTarefa">Status da Tarefa:</label>
+            <select class="form-select" @bind="Tarefa.StatusTarefa">
+                <option value="Em Andamento">Em Andamento</option>
+                <option value="Concluído">Concluído</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-2">Salvar</button>
+
+    </EditForm>
+}
+else
+{
+    <p>Tarefa não encontrada.</p>
+}
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    public Todo Tarefa { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Tarefa = await Context.Todos.FindAsync(Id);
+    }
+
+    public async Task EditarTarefa()
+    {
+        Context.Todos.Update(Tarefa);
+        await Context.SaveChangesAsync();
+        Navigation.NavigateTo(uri:"tarefas");
+    }
+}

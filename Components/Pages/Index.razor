@@ -1,0 +1,71 @@
+﻿@page "/tarefas"
+
+@inject ApplicationDbContext Context
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager Navigation
+
+@attribute [Authorize]
+
+@if (!Todos.Any())
+{
+    <button type="button">
+        Criar nova tarefa
+    </button>
+
+    <p class="text-center">
+        <em>Carregando tarefas...</em>
+    </p>
+}
+else
+{
+    <a href="/tarefas/criar" class="btn btn-outline-primary mb-2">Cadastar Nova Tarefa</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome Tarefa</th>
+                <th>Descrição</th>
+                <th>Data</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tarefa in Todos)
+            {
+                <tr>
+                    <td>@tarefa.TarefaName</td>
+                    <td>@tarefa.TarefaDescription</td>
+                    <td>@tarefa.DataTarefa.ToString("d")</td>
+                    <td>
+                        @tarefa.StatusTarefa
+                    </td>
+                    <td>
+                        <a href="/tarefas/editar/@tarefa.Id" class="btn btn-outline-warning">Editar tarefa</a>
+                        <a href="/tarefas/excluir/@tarefa.Id" class="btn btn-outline-danger">Exluir tarefa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    public List<Todo> Todos = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authenticationState.User;
+
+        if (user != null)
+        {
+            Todos = await Context.Todos
+                .Where(x => x.User == user.Identity.Name)
+                .ToListAsync();
+        }
+    }
+}
+
+
+
+
